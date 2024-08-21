@@ -33,6 +33,9 @@ void Cinema::maintenanceMenu()
 	int numOfMovies = 0;
 	int numOfRooms = 0;
 	int movieNumber = 0;
+	int roomSelect = 0;
+	Movie movieSelect;
+
 	while (open)
 	{
 		printf("Elija una opcion\n");
@@ -62,18 +65,30 @@ void Cinema::maintenanceMenu()
 			cin.ignore();
 			roomInfo.createRooms(numOfRooms);
 
-			for (int i = 0; i < numOfRooms; i++)
+			for (int i = 0; i < numOfMovies; i++)
 			{
-				printf("Digite cual pelicula desea para la sala %d: \n", i + 1);
+				printf("Seleccione el numero de sala a la que asignar la pelicula: \n");
+				scanf_s("%d", &roomSelect);
+				cin.ignore();
+
+				printf("Selecciona el numero de pelicula a asignar: \n");
 				scanf_s("%d", &movieNumber);
 				cin.ignore();
+
+				roomInfo.assingMovie(roomSelect - 1, movies[movieNumber - 1]);
 			}
+
+
 			break;
 		case 3:
 			/*printf("Pelicula a mostrar: ");
 			scanf_s("%d", &movieNumber);
 			movieInfo.printMovie(movieNumber);*/
-			reserveMenu();
+			/*reserveMenu();*/
+			printf("Seleccione el numero de sala para imprimir: \n");
+			scanf_s("%d", &roomSelect);
+			cin.ignore();
+			roomInfo.printRoomWithMovie(roomSelect);
 			break;
 		case 4:
 			return;
@@ -84,11 +99,7 @@ void Cinema::maintenanceMenu()
 
 void Cinema::reserveMenu()
 {
-	int roomSelect = 0;
-	printf("Cual sala desea reservar: ");
-	scanf_s("%d", &roomSelect);
 
-	roomInfo.printRoom(roomSelect);
 }
 
 void Cinema::about()
@@ -118,8 +129,7 @@ void Cinema::about()
 
 }
 
-
-void Cinema::createMovies(Movie movies)
+void Cinema::createMovies(Movie& movies)
 {
 	string name = " ";
 	string country = " ";
@@ -141,6 +151,7 @@ void Cinema::createMovies(Movie movies)
 
 	printf("Anio de la pelicula: \n");
 	scanf_s("%d", &year);
+	cin.ignore();
 
 	movies.setName(name);
 	movies.setCountry(country);
@@ -148,3 +159,4 @@ void Cinema::createMovies(Movie movies)
 	movies.setDuration(duration);
 	movies.setYear(year);
 }
+

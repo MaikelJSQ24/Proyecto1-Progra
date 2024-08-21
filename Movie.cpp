@@ -67,3 +67,8 @@ int Movie::getYear()
 {
 	return year;
 }
+
+void Movie::toString()
+{
+
+}

@@ -13,7 +13,6 @@ private:
 	Movie movieInfo;
 	Movie* movies;
 	Room roomInfo;
-
 public:
 	Cinema();
 
@@ -23,6 +22,7 @@ public:
 
 	void about();
 
-	void createMovies(Movie movie);
+	void createMovies(Movie& movie);
+	void assingMovies();
 };
 

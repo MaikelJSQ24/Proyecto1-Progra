@@ -8,12 +8,15 @@ class Room
 private:
 	string** seats;
 	Room* rooms;
-	int movieSelect;
-	Movie movie1;
+	int numOfRooms;
+	Movie assignedMovie;
 public:
 	Room();
 
 	void createRooms(int numOfRooms);
 	void printRoom(int room);
+	void assingMovie(int roomSelect, Movie& movie);
+	Movie getAssingnedMovie(int roomSelect);
+	void printRoomWithMovie(int room);
 };
 

@@ -26,7 +26,6 @@ public:
 	int getDuration();
 	int getYear();
 
-	string getMovieName();
 	void toString();
 };
 
