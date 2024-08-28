@@ -1,2 +1,6 @@
-﻿  Room.cpp
+﻿  Cinema.cpp
+D:\Visual Studio 2024\Programacion 1\Proyecto1\Cinema.cpp(314,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Proyecto1.cpp
+  Room.cpp
+  Generando código...
   Proyecto1.vcxproj -> D:\Visual Studio 2024\Programacion 1\Proyecto1\x64\Debug\Proyecto1.exe

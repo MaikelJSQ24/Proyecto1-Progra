@@ -1,8 +1,11 @@
 #include "Room.h"
+#include "Cinema.h"
+#include "Client.h"
 
 const int rows = 8;
 const int columns = 14;
-
+Cinema cinemaInfo;
+Client clientInfo;
 Room::Room()
 {
 	seats = nullptr;
@@ -129,15 +132,18 @@ bool Room::freeSeats(int roomSelect, int row, int column)
 void Room::reserveSeats(int roomSelect, int row, int column)
 {
 	bool access = freeSeats(roomSelect, row, column);
+	int ticket = 0;
 
 	if (access)
 	{
 		rooms[roomSelect - 1].seats[row - 1][column - 1] = "R";
 		printf("Asiento(s) reservado(s)\n");
+		cinemaInfo.createTicket();
+		ticket = clientInfo.getTicket();
+		printf("Su tickete de compra es: %d\n", ticket);
 	}
 	else {
 		printf("Lo sentimos, asiento ocupado\n");
-		return;
 	}
 }
 

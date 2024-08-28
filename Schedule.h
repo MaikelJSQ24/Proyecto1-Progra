@@ -20,4 +20,3 @@ public:
 	string getStartHour();
 	string getEndHour();
 };
-

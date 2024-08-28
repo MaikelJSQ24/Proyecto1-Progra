@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cinema.cpp" />
+    <ClCompile Include="Client.cpp" />
     <ClCompile Include="Movie.cpp" />
     <ClCompile Include="Proyecto1.cpp" />
     <ClCompile Include="Room.cpp" />
@@ -135,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cinema.h" />
+    <ClInclude Include="Client.h" />
     <ClInclude Include="Movie.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Schedule.h" />

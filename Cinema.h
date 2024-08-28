@@ -4,6 +4,7 @@
 #include "Movie.h"
 #include "Room.h"
 #include "Schedule.h"
+#include "Client.h"
 using namespace std;
 
 class Cinema
@@ -16,6 +17,7 @@ private:
 	Room roomInfo;
 	Schedule scheduleInfo;
 	Schedule* schedules;
+	Client clientInfo;
 	int numOfSchedules;
 public:
 	Cinema();
@@ -28,5 +30,6 @@ public:
 
 	void createMovies(Movie& movie);
 	void createSchedules(Schedule& schedule);
+	void createTicket();
 };
 

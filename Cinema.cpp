@@ -135,20 +135,31 @@ void Cinema::reserveMenu()
 	printf("En total hay 112 butacas.\n");
 	printf("Para elegir un asiento primero escriba la fila y despues la columna que desea reservar.\n");
 	system("PAUSE");
-	printf("\n");
 
-	printf("D = Disponible. R = Reservado. C = Comprado\n");
+	printf("\nD = Disponible. R = Reservado. C = Comprado\n");
 	roomInfo.printRoomInfo(roomSelect);
 	printf("Cuantos asientos desea reservar: ");
 	scanf_s("%d", &seatsCount);
 
 	while (seatsCount > 0)
 	{
-		printf("Digite fila y columna a reservar: \n");
-		scanf_s("%d %d", &seatRow, &seatColumn);
-		roomInfo.freeSeats(roomSelect, seatRow, seatColumn);
-		roomInfo.reserveSeats(roomSelect, seatRow, seatColumn);
-		seatsCount--;
+		bool isAvailable = false;
+		while (!isAvailable)
+		{
+			printf("Digite fila y columna a reservar: \n");
+			scanf_s("%d %d", &seatRow, &seatColumn);
+			if (!roomInfo.freeSeats(roomSelect, seatRow, seatColumn))
+			{
+				printf("El asiento esta ocupado, por favor seleccione otro.\n");
+			}
+			else
+			{
+				isAvailable = true;
+				roomInfo.reserveSeats(roomSelect, seatRow, seatColumn);
+				seatsCount--;
+			}
+		}
+
 	}
 	roomInfo.printRoom(roomSelect);
 }
@@ -295,4 +306,13 @@ void Cinema::createSchedules(Schedule& schedule)
 	schedule.setDay(date);
 	schedule.setStartHour(startHour);
 	schedule.setEndHour(endHour);
+}
+
+void Cinema::createTicket()
+{
+	int ticket = 0;
+	srand(time(nullptr));
+	ticket = rand() % 9999 + 1;
+
+	clientInfo.setTicket(ticket);
 }

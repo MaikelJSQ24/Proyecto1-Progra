@@ -31,4 +31,3 @@ public:
 	void reserveSeats(int roomSelect, int row, int column);
 	void printRoomInfo(int room);
 };
-
