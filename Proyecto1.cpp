@@ -27,7 +27,7 @@ int main()
 			cinema1.maintenanceMenu();
 			break;
 		case 3:
-
+			cinema1.reserveMenu();
 			break;
 		case 4:
 

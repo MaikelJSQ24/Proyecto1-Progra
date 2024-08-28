@@ -3,6 +3,7 @@
 #include <string>
 #include "Movie.h"
 #include "Room.h"
+#include "Schedule.h"
 using namespace std;
 
 class Cinema
@@ -13,6 +14,9 @@ private:
 	Movie movieInfo;
 	Movie* movies;
 	Room roomInfo;
+	Schedule scheduleInfo;
+	Schedule* schedules;
+	int numOfSchedules;
 public:
 	Cinema();
 
@@ -23,6 +27,6 @@ public:
 	void about();
 
 	void createMovies(Movie& movie);
-	void assingMovies();
+	void createSchedules(Schedule& schedule);
 };
 
