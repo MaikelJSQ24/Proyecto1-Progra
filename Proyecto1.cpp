@@ -4,6 +4,7 @@ int main()
 {
 	Cinema cinema1;
 	bool open = true;
+	bool access = false;
 	int option = 0;
 
 	while (open)
@@ -14,7 +15,6 @@ int main()
 		printf("2. Mantenimiento\n");
 		printf("3. Reserva\n");
 		printf("4. Venta\n");
-		printf("5. Salir\n");
 		scanf_s("%d", &option);
 		system("CLS");
 
@@ -25,15 +25,25 @@ int main()
 			break;
 		case 2:
 			cinema1.maintenanceMenu();
+			access = true;
 			break;
 		case 3:
-			cinema1.reserveMenu();
+			if (access)
+			{
+				cinema1.reserveMenu();
+			}
+			else {
+				printf("Error, primero haga el mantenimiento.\n");
+			}
 			break;
 		case 4:
-
-			break;
-		case 5:
-			exit(0);
+			if (access)
+			{
+				
+			}
+			else {
+				printf("Error, primero haga el mantenimiento.\n");
+			}
 			break;
 		}
 	}

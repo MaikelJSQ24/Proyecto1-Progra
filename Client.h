@@ -16,8 +16,9 @@ public:
 	void setId(int id);
 	void setTicket(int ticket);
 
+	int getTicket();
 	string getClient();
 	string getId();
-	int getTicket();
+	
 };
 

@@ -32,4 +32,3 @@ public:
 	void createSchedules(Schedule& schedule);
 	void createTicket();
 };
-

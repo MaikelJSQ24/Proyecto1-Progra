@@ -1,5 +1,7 @@
 #include "Cinema.h"
 
+int ticketVector[10];
+
 Cinema::Cinema()
 {
 	open = true;
@@ -68,53 +70,68 @@ void Cinema::maintenanceMenu()
 
 			break;
 		case 2:
-			printf("Cuantos horarios tendra el cine: ");
-			scanf_s("%d", &numOfSchedules);
-			cin.ignore();
-
-			schedules = new Schedule[numOfSchedules];
-
-			for (int i = 0; i < numOfSchedules; i++)
+			if (movies != nullptr || option == 3)
 			{
-				createSchedules(schedules[i]);
-
-			}
-
-			break;
-		case 3:
-			printf("Cuantas salas desea crear: \n");
-			scanf_s("%d", &numOfRooms);
-			cin.ignore();
-			roomInfo.createRooms(numOfRooms);
-
-			for (int i = 0; i < numOfMovies; i++)
-			{
-				printf("Seleccione el numero de sala a la que asignar la pelicula 1 a %d: \n", numOfRooms);
-				scanf_s("%d", &roomSelect);
-				cin.ignore();
-
-				printf("Selecciona el numero de pelicula a asignar 1 a %d: \n", numOfMovies);
-				scanf_s("%d", &movieNumber);
-				cin.ignore();
-
-				roomInfo.assingMovie(roomSelect - 1, movies[movieNumber - 1]);
-
-				printf("Cuantos horarios desea asignar a la sala %d: \n", roomSelect);
+				printf("Cuantos horarios tendra el cine: ");
 				scanf_s("%d", &numOfSchedules);
 				cin.ignore();
 
-				Schedule* roomSchedules = new Schedule[numOfSchedules];
-				for (int j = 0; j < numOfSchedules; j++)
+				schedules = new Schedule[numOfSchedules];
+
+				for (int i = 0; i < numOfSchedules; i++)
 				{
-					printf("Selecciona el horario %d: \n", j + 1);
-					scanf_s("%d", &scheduleSelect);
+					createSchedules(schedules[i]);
+
+				}
+			}
+			else {
+				printf("Error, primero debe crear las peliculas.\n");
+			}
+
+
+			break;
+		case 3:
+			if (movies != nullptr || schedules != nullptr)
+			{
+				printf("Cuantas salas desea crear: \n");
+				scanf_s("%d", &numOfRooms);
+				cin.ignore();
+				roomInfo.createRooms(numOfRooms);
+
+				for (int i = 0; i < numOfMovies; i++)
+				{
+					printf("Seleccione el numero de sala a la que asignar la pelicula 1 a %d: \n", numOfRooms);
+					scanf_s("%d", &roomSelect);
 					cin.ignore();
 
-					roomSchedules[j] = schedules[scheduleSelect - 1];
-				}
+					printf("Selecciona el numero de pelicula a asignar 1 a %d: \n", numOfMovies);
+					scanf_s("%d", &movieNumber);
+					cin.ignore();
 
-				roomInfo.assingSchedule(roomSelect - 1, roomSchedules, numOfSchedules);
+					roomInfo.assingMovie(roomSelect - 1, movies[movieNumber - 1]);
+
+					printf("Cuantos horarios desea asignar a la sala %d: \n", roomSelect);
+					scanf_s("%d", &numOfSchedules);
+					cin.ignore();
+
+					Schedule* roomSchedules = new Schedule[numOfSchedules];
+					for (int j = 0; j < numOfSchedules; j++)
+					{
+						printf("Selecciona el horario %d: \n", j + 1);
+						scanf_s("%d", &scheduleSelect);
+						cin.ignore();
+
+						roomSchedules[j] = schedules[scheduleSelect - 1];
+					}
+
+					roomInfo.assingSchedule(roomSelect - 1, roomSchedules, numOfSchedules);
+				}
 			}
+			else
+			{
+				printf("Error, primero debe crear las peliculas y horarios.\n");
+			}
+
 			break;
 		case 4:
 			return;
@@ -132,7 +149,8 @@ void Cinema::reserveMenu()
 	scanf_s("%d", &roomSelect);
 	system("CLS");
 	printf("Aqui reservara su asiento.\n");
-	printf("En total hay 112 butacas.\n");
+	printf("En total hay 112 butacas.\nCada butaca cuesta 2800 colones.\n");
+
 	printf("Para elegir un asiento primero escriba la fila y despues la columna que desea reservar.\n");
 	system("PAUSE");
 
@@ -157,11 +175,17 @@ void Cinema::reserveMenu()
 				isAvailable = true;
 				roomInfo.reserveSeats(roomSelect, seatRow, seatColumn);
 				seatsCount--;
+				if (seatsCount == 0)
+				{
+					createTicket();
+				}
 			}
 		}
 
 	}
+	printf("Su ticket de compra es: %d\n", clientInfo.getTicket());
 	roomInfo.printRoom(roomSelect);
+
 }
 
 void Cinema::about()
@@ -311,8 +335,12 @@ void Cinema::createSchedules(Schedule& schedule)
 void Cinema::createTicket()
 {
 	int ticket = 0;
+	int numOfTickets = 0;
 	srand(time(nullptr));
 	ticket = rand() % 9999 + 1;
 
 	clientInfo.setTicket(ticket);
+
+	ticketVector[numOfTickets] = ticket;
+	numOfTickets++;
 }

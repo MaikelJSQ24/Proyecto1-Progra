@@ -1,3 +1,4 @@
+
 #include "Room.h"
 #include "Cinema.h"
 #include "Client.h"
@@ -13,7 +14,7 @@ Room::Room()
 	assignedMovie;
 	scheduleCount = 0;
 	numOfRooms = 0;
-	assignedSchedules=nullptr;
+	assignedSchedules = nullptr;
 }
 
 void Room::setScheduleCount(int scheduleCount)
@@ -53,8 +54,8 @@ void Room::assingMovie(int roomSelect, Movie& movie)
 void Room::assingSchedule(int roomSelect, Schedule* schedules, int scheduleCount)
 {
 	Room& room = rooms[roomSelect];
-	rooms->scheduleCount = scheduleCount;
-	room.assignedSchedules = new Schedule * [scheduleCount];
+	room.scheduleCount = scheduleCount;
+	room.assignedSchedules = new Schedule * [3];
 	for (int i = 0; i < scheduleCount; i++)
 	{
 		room.assignedSchedules[i] = new Schedule(schedules[i]);
@@ -106,7 +107,7 @@ void Room::printRoomInfo(int room)
 	printf("Duracion: %d minutos\n", movie.getDuration());
 	printf("Anio: %d\n", movie.getYear());
 
-	cout << "Horarios asignados:" << endl;
+	printf("Horarios asignados:\n");
 	for (int i = 0; i < selectedRoom.scheduleCount; i++) {
 		Schedule* schedule = selectedRoom.assignedSchedules[i];
 		printf("Fecha: %s\n", schedule->getDay().c_str());
@@ -132,19 +133,13 @@ bool Room::freeSeats(int roomSelect, int row, int column)
 void Room::reserveSeats(int roomSelect, int row, int column)
 {
 	bool access = freeSeats(roomSelect, row, column);
-	int ticket = 0;
 
 	if (access)
 	{
 		rooms[roomSelect - 1].seats[row - 1][column - 1] = "R";
 		printf("Asiento(s) reservado(s)\n");
-		cinemaInfo.createTicket();
-		ticket = clientInfo.getTicket();
-		printf("Su tickete de compra es: %d\n", ticket);
 	}
 	else {
 		printf("Lo sentimos, asiento ocupado\n");
 	}
 }
-
-

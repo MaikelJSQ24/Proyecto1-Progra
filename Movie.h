@@ -1,7 +1,9 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "Schedule.h"
 using namespace std;
+
 class Movie
 {
 private:

@@ -8,6 +8,7 @@ private:
 	string date;
 	string startHour;
 	string endHour;
+
 public:
 	Schedule();
 	Schedule(string day, string startHour, string endHour);
