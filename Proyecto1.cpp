@@ -39,7 +39,7 @@ int main()
 		case 4:
 			if (access)
 			{
-				
+				cinema1.buyMenu();
 			}
 			else {
 				printf("Error, primero haga el mantenimiento.\n");

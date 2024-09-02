@@ -3,14 +3,14 @@
 Client::Client()
 {
 	nameClient = " ";
-	id = " ";
+	card = " ";
 	ticket = 0;
 }
 
-Client::Client(string nameClient, string id, int ticket)
+Client::Client(string nameClient, string card, int ticket)
 {
 	this->nameClient = nameClient;
-	this->id = id;
+	this->card = card;
 	this->ticket = ticket;
 }
 
@@ -19,9 +19,9 @@ void Client::setClient(string nameClient)
 	this->nameClient = nameClient;
 }
 
-void Client::setId(int id)
+void Client::setId(int card)
 {
-	this->id = id;
+	this->card = card;
 }
 
 void Client::setTicket(int ticket)
@@ -36,7 +36,7 @@ string Client::getClient()
 
 string Client::getId()
 {
-	return id;
+	return card;
 }
 
 int Client::getTicket()

@@ -19,16 +19,23 @@ private:
 	Schedule* schedules;
 	Client clientInfo;
 	int numOfSchedules;
+	int ticketVector[10];
+	int seatsReserved;
 public:
 	Cinema();
 
 	void archiveMenu();
 	void maintenanceMenu();
 	void reserveMenu();
+	void buyMenu();
 
 	void about();
 
 	void createMovies(Movie& movie);
 	void createSchedules(Schedule& schedule);
 	void createTicket();
+	int* getTicketVector();
+	int getSeats();
+	bool correctTicket(int typedTicket);
+	void dataClient();
 };

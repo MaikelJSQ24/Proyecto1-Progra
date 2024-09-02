@@ -6,14 +6,14 @@ class Client
 {
 private:
 	string nameClient;
-	string id;
+	string card;
 	int ticket;
 public:
 	Client();
-	Client(string nameClient, string id, int ticket);
+	Client(string nameClient, string card, int ticket);
 
 	void setClient(string nameClient);
-	void setId(int id);
+	void setId(int card);
 	void setTicket(int ticket);
 
 	int getTicket();

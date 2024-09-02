@@ -28,6 +28,8 @@ public:
 	Schedule getAssignedSchedule(int roomSelect);
 
 	bool freeSeats(int roomSelect, int row, int column);
+	bool isReserveSeats(int roomSelect, int row, int column);
 	void reserveSeats(int roomSelect, int row, int column);
+	void buySeats(int roomSelect, int row, int column);
 	void printRoomInfo(int room);
 };
