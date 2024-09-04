@@ -19,7 +19,9 @@ private:
 	Schedule* schedules;
 	Client clientInfo;
 	int numOfSchedules;
-	int ticketVector[10];
+	int* ticketVector;
+	int numOfTickets;
+	int newNumOfTickets;
 	int seatsReserved;
 public:
 	Cinema();

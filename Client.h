@@ -1,24 +1,21 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "Person.h"
 using namespace std;
-class Client
+class Client : public Person
 {
 private:
-	string nameClient;
-	string card;
+	int card;
 	int ticket;
 public:
 	Client();
-	Client(string nameClient, string card, int ticket);
+	Client(string name, string id, int card, int ticket);
 
-	void setClient(string nameClient);
-	void setId(int card);
+	void setCard(int card);
 	void setTicket(int ticket);
 
+	int getCard();
 	int getTicket();
-	string getClient();
-	string getId();
-	
 };
 

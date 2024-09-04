@@ -2,24 +2,21 @@
 
 Client::Client()
 {
-	nameClient = " ";
-	card = " ";
+	name = " ";
+	id = " ";
+	card = 0;
 	ticket = 0;
 }
 
-Client::Client(string nameClient, string card, int ticket)
+Client::Client(string name, string id, int card, int ticket)
 {
-	this->nameClient = nameClient;
+	this->name = name;
+	this->id = id;
 	this->card = card;
 	this->ticket = ticket;
 }
 
-void Client::setClient(string nameClient)
-{
-	this->nameClient = nameClient;
-}
-
-void Client::setId(int card)
+void Client::setCard(int card)
 {
 	this->card = card;
 }
@@ -29,12 +26,7 @@ void Client::setTicket(int ticket)
 	this->ticket = ticket;
 }
 
-string Client::getClient()
-{
-	return nameClient;
-}
-
-string Client::getId()
+int Client::getCard()
 {
 	return card;
 }

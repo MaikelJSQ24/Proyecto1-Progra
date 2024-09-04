@@ -130,6 +130,7 @@
     <ClCompile Include="Cinema.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Movie.cpp" />
+    <ClCompile Include="Person.cpp" />
     <ClCompile Include="Proyecto1.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="Schedule.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="Cinema.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Movie.h" />
+    <ClInclude Include="Person.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Schedule.h" />
   </ItemGroup>

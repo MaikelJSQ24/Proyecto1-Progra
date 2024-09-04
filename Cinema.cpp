@@ -8,10 +8,9 @@ Cinema::Cinema()
 	numOfSchedules = 0;
 	schedules = nullptr;
 	seatsReserved = 0;
-	for (int i = 0; i < 10; i++)
-	{
-		ticketVector[i] = 0;
-	}
+	ticketVector = new int[newNumOfTickets];
+	numOfTickets = 0;
+	newNumOfTickets = 1;
 }
 
 void Cinema::about()
@@ -161,14 +160,25 @@ void Cinema::createSchedules(Schedule& schedule)
 void Cinema::createTicket()
 {
 	int ticket = 0;
-	int numOfTickets = 0;
 	srand(time(nullptr));
 	ticket = rand() % 99 + 1;
 
-	clientInfo.setTicket(ticket);
+	if (numOfTickets >= newNumOfTickets)
+	{
+		int newCapacity = newNumOfTickets * 2;
+		int* auxTicketVector = new int[newCapacity];
 
+		for (int i = 0; i < numOfTickets; i++)
+		{
+			auxTicketVector[i] = ticketVector[i];
+		}
+		delete[] ticketVector;
+		ticketVector = auxTicketVector;
+		newNumOfTickets = newCapacity;
+	}
 	ticketVector[numOfTickets] = ticket;
 	numOfTickets++;
+	clientInfo.setTicket(ticket);
 }
 
 int* Cinema::getTicketVector()
@@ -197,15 +207,19 @@ bool Cinema::correctTicket(int typedTicket)
 void Cinema::dataClient()
 {
 	string nameClient = " ";
+	string idClient = " ";
 	int card = 0;
 
 	printf("Digite su nombre completo: ");
 	getline(cin, nameClient);
+	printf("Digite su identificacion: ");
+	getline(cin, idClient);
 	printf("Digite numero de su targeta: ");
 	scanf_s("%d", &card);
 
-	clientInfo.setClient(nameClient);
-	clientInfo.setId(card);
+	clientInfo.setName(nameClient);
+	clientInfo.setId(idClient);
+	clientInfo.setCard(card);
 }
 
 void Cinema::archiveMenu()
@@ -395,13 +409,13 @@ void Cinema::buyMenu()
 	scanf_s("%d", &typedTicket);
 	cin.ignore();
 
-
 	if (correctTicket(typedTicket))
 	{
 		dataClient();
 		printf("Compra realizada con exito.\n");
 		printf("Factura.\n");
-		printf("Nombre del cliente: %s\n", clientInfo.getClient().c_str());
+		printf("Nombre del cliente: %s\n", clientInfo.getName().c_str());
+		printf("Identificacion: %s\n", clientInfo.getId().c_str());
 		printf("Asientos reservados: %d\n", seats);
 		printf("Total pagado: %d\n", entrance * seats);
 	}
