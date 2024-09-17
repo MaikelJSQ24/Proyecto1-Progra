@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Visual Studio 2024\\Programacion 1\\Proyecto1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{03DE71B0-FEEF-4A25-B8A6-A08EF31376B5}|Proyecto1.vcxproj|D:\\Visual Studio 2024\\Programacion 1\\Proyecto1\\Cinema.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{03DE71B0-FEEF-4A25-B8A6-A08EF31376B5}|Proyecto1.vcxproj|solutionrelative:Cinema.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03DE71B0-FEEF-4A25-B8A6-A08EF31376B5}|Proyecto1.vcxproj|D:\\Visual Studio 2024\\Programacion 1\\Proyecto1\\Cinema.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{03DE71B0-FEEF-4A25-B8A6-A08EF31376B5}|Proyecto1.vcxproj|solutionrelative:Cinema.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Cinema.h",
+              "DocumentMoniker": "D:\\Visual Studio 2024\\Programacion 1\\Proyecto1\\Cinema.h",
+              "RelativeDocumentMoniker": "Cinema.h",
+              "ToolTip": "D:\\Visual Studio 2024\\Programacion 1\\Proyecto1\\Cinema.h",
+              "RelativeToolTip": "Cinema.h",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAACgAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-09-17T22:00:45.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Cinema.cpp",
+              "DocumentMoniker": "D:\\Visual Studio 2024\\Programacion 1\\Proyecto1\\Cinema.cpp",
+              "RelativeDocumentMoniker": "Cinema.cpp",
+              "ToolTip": "D:\\Visual Studio 2024\\Programacion 1\\Proyecto1\\Cinema.cpp",
+              "RelativeToolTip": "Cinema.cpp",
+              "ViewState": "AQIAAEYBAAAAAAAAAAAawGEBAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-17T22:00:07.321Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

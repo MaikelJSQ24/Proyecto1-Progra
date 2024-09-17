@@ -42,7 +42,7 @@ void Room::createRooms(int numOfRooms)
 void Room::printRoom(int roomSelect)
 {
 
-	printf("Sala seleccionada %d: \n", roomSelect);
+	printf("Sala %d: \n", roomSelect);
 
 	if (movie != nullptr) {
 		printf("Pelicula: \n");

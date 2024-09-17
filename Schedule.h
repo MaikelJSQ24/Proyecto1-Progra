@@ -1,8 +1,10 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <chrono>
 #include "Movie.h"
 using namespace std;
+using namespace chrono;
 class Schedule
 {
 private:
@@ -19,8 +21,9 @@ public:
 	bool leapYear(int year);
 	bool validDate(int day, int month, int year);
 	int validMonth(int month, int year);
+	string getHour();
+	int convertToMinutes(string hour);
+	int differenceBetweenHours(string start);
 	string printSchedule();
-
-	void assingMovie(Movie* movie);
 };
 

@@ -16,7 +16,7 @@ public:
 	Movie(string nameMovie, string countryMovie, string reviewMovie, int durationMovie, int yearMovie);
 	~Movie();
 	void createMovies(int numOfMovies);
-
+	string getMovieName();
 	string printMovie();
 	string printMoviePurchased();
 };

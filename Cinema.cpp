@@ -8,10 +8,10 @@ Cinema::Cinema()
 	numOfRooms = 0;
 	numOfFuntions = 0;
 	numOfClients = 0;
+	numOfTickets = 0;
 	seatsReserved = 0;
 	roomSelected = 0;
 	allSeatsReserved = 0;
-	numOfTickets = 0;
 	reservedSeatsColumn = nullptr;
 	reservedSeatsRow = nullptr;
 	ticketVector = new int[numOfTickets];
@@ -132,13 +132,33 @@ void Cinema::menuOfMaintenance()
 void Cinema::reserveMenu()
 {
 	string name = "";
+	string movieName = "";
+	bool movieFound = false;
 	int roomSelect = 0;
 	int seatRow = 0, seatColumn = 0;
 	int seatsCount = 0;
 
-	printf("Seleccione el numero de sala a reservar: \n");
-	scanf_s("%d", &roomSelect);
 	cin.ignore();
+	printf("Digite el nombre de la pelicula a reservar: ");
+	getline(cin, movieName);
+	for (int i = 0; i < numOfRooms; i++)
+	{
+		if (roomInfo[i].getMovie() != nullptr && roomInfo[i].getMovie()->getMovieName() == movieName)
+		{
+			roomSelect = i + 1;
+			movieFound = true;
+			break;
+		}
+	}
+
+
+	int timeDifference = roomInfo[roomSelect - 1].getSchedule()->differenceBetweenHours(roomInfo[roomSelect - 1].getSchedule()->getHour());
+	if (timeDifference < 30)
+	{
+		printf("Lo sentimos, no puede reservar debido a que faltan menos de 30 minutos para empezar.\n");
+		return;
+	}
+
 	system("CLS");
 	printf("Aqui reservara su asiento.\n");
 	printf("En total hay 112 butacas.\nCada butaca cuesta 2800 colones.\n");
@@ -147,6 +167,15 @@ void Cinema::reserveMenu()
 
 	printf("Antes de reservar, digite su nombre: ");
 	getline(cin, name);
+	if (movieFound)
+	{
+		printf("La pelicula seleccionada: %s se muestra en la sala: %d", movieName.c_str(), roomSelect);
+	}
+	else
+	{
+		printf("No se encontro la pelicula\n");
+		return;
+	}
 	printf("\nD = Disponible. R = Reservado. C = Comprado\n");
 	roomInfo[roomSelect - 1].printRoom(roomSelect);
 	printf("Cuantos asientos desea reservar: ");
@@ -195,6 +224,7 @@ void Cinema::reserveMenu()
 
 void Cinema::buyMenu()
 {
+
 	cin.ignore();
 	string name = "";
 	string option = "";
@@ -210,8 +240,6 @@ void Cinema::buyMenu()
 		printf("Su ticket es: %d", findTheTicket(name));
 
 	}
-
-
 	bool buy = false;
 	int typedTicket = 0;
 
@@ -258,9 +286,6 @@ void Cinema::buyMenu()
 			}
 		}
 	}
-
-
-
 }
 
 void Cinema::about()
@@ -331,7 +356,7 @@ void Cinema::loadTickets(int*& ticketVector, int& size, int newTicket)
 
 int Cinema::generateTicket()
 {
-	return rand() % 99 + 1;
+	return rand() % 9999 + 1;
 }
 
 void Cinema::createTicket()

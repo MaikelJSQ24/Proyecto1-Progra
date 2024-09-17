@@ -50,6 +50,11 @@ void Movie::createMovies(int numOfMovies)
 	movieCount++;
 }
 
+string Movie::getMovieName()
+{
+	return nameMovie;
+}
+
 string Movie::printMovie()
 {
 	string movie;

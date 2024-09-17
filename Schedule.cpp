@@ -25,7 +25,7 @@ Schedule::~Schedule()
 
 void Schedule::createSchedule(int numOfFuntions)
 {
-	if (schedules != nullptr) 
+	if (schedules != nullptr)
 	{
 		for (int i = 0; i < numOfFuntions; ++i) {
 			delete schedules[i];
@@ -47,10 +47,18 @@ void Schedule::createSchedule(int numOfFuntions)
 		if (validDate(day, month, year))
 		{
 			year = (year < 999) ? year + 2000 : year;
-			date = (day < 10) ? "0" + to_string(day) + "/" : to_string(day) + "/";
-			date += (month < 10) ? "0" + to_string(month) + "/" : to_string(month) + "/";
-			date += to_string(year);
-			access = false;
+			if (year < 2024)
+			{
+				printf("Lo sentimos, no puede agregar un anio anterior a 2024.\nIntente de nuevo\n");
+				return;
+			}
+			else
+			{
+				date = (day < 10) ? "0" + to_string(day) + "/" : to_string(day) + "/";
+				date += (month < 10) ? "0" + to_string(month) + "/" : to_string(month) + "/";
+				date += to_string(year);
+				access = false;
+			}
 		}
 		else
 		{
@@ -106,6 +114,48 @@ int Schedule::validMonth(int month, int year)
 	}
 }
 
+string Schedule::getHour()
+{
+	return startHour;
+}
+
+int Schedule::convertToMinutes(string hourStart)
+{
+	int hour = stoi(hourStart.substr(0, hourStart.find(":")));
+	int minutes = stoi(hourStart.substr(hourStart.find(":") + 1, 2));
+	bool PM = hourStart.find("PM") != string::npos;
+
+	if (PM && hour < 12)
+	{
+		hour += 12;
+	}
+	if (!PM && hour == 0)
+	{
+		hour = 0;
+	}
+	return hour * 60 + minutes;
+}
+
+int Schedule::differenceBetweenHours(string start)
+{
+	int currentHour = 0;
+	int currentMinutes = 0;
+	int totalHour = 0;
+	int startMinutes = 0;
+
+	time_t actuallHour = time(0);
+	tm localTime = { 0 };
+	localtime_s(&localTime, &actuallHour);
+
+	currentHour = localTime.tm_hour;
+	currentMinutes = localTime.tm_min;
+	totalHour = currentHour * 60 + currentMinutes;
+
+	startMinutes = convertToMinutes(startHour);
+
+	return startMinutes - totalHour;
+}
+
 string Schedule::printSchedule()
 {
 	string schedule;
@@ -115,9 +165,4 @@ string Schedule::printSchedule()
 	schedule += "Hora fin: " + endHour + "\n";
 
 	return schedule;
-}
-
-void Schedule::assingMovie(Movie* movie)
-{
-	this->movie = movie;
 }
