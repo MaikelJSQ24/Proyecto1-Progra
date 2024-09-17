@@ -2,10 +2,11 @@
 
 int main()
 {
+	srand(time(nullptr));
 	Cinema cinema1;
+	int option = 0;
 	bool open = true;
 	bool access = false;
-	int option = 0;
 
 	while (open)
 	{
@@ -24,7 +25,7 @@ int main()
 			cinema1.archiveMenu();
 			break;
 		case 2:
-			cinema1.maintenanceMenu();
+			cinema1.menuOfMaintenance();
 			access = true;
 			break;
 		case 3:
@@ -47,4 +48,5 @@ int main()
 			break;
 		}
 	}
+	
 }

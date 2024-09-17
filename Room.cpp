@@ -7,116 +7,103 @@ Room::Room()
 {
 	seats = nullptr;
 	rooms = nullptr;
-	assignedMovie;
-	scheduleCount = 0;
-	numOfRooms = 0;
-	assignedSchedules = nullptr;
+	movie = nullptr;
+	schedule = nullptr;
 }
 
-void Room::setScheduleCount(int scheduleCount)
+Room::~Room()
 {
-	this->scheduleCount = scheduleCount;
-}
-
-int Room::getScheduleCount()
-{
-	return scheduleCount;
+	if (seats != nullptr)
+	{
+		for (int i = 0; i < rows; ++i) 
+		{
+			delete[] seats[i];
+		}
+		delete[] seats;
+	}
+	delete movie;
+	delete schedule;
 }
 
 void Room::createRooms(int numOfRooms)
 {
-	rooms = new Room[numOfRooms];
-
-	for (int i = 0; i < numOfRooms; i++)
+	seats = new string * [rows];
+	for (int i = 0; i < rows; i++)
 	{
-		rooms[i].seats = new string * [rows];
-		for (int j = 0; j < rows; j++)
+		seats[i] = new string[columns];
+
+		for (int j = 0; j < columns; j++)
 		{
-			rooms[i].seats[j] = new string[columns];
-			for (int k = 0; k < columns; k++)
-			{
-				rooms[i].seats[j][k] = "D";
-			}
+			seats[i][j] = "D";
 		}
 	}
-
 }
 
-void Room::assingMovie(int roomSelect, Movie& movie)
+void Room::printRoom(int roomSelect)
 {
-	rooms[roomSelect].assignedMovie = movie;
-}
 
-void Room::assingSchedule(int roomSelect, Schedule* schedules, int scheduleCount)
-{
-	Room& room = rooms[roomSelect];
-	room.scheduleCount = scheduleCount;
-	room.assignedSchedules = new Schedule * [3];
-	for (int i = 0; i < scheduleCount; i++)
-	{
-		room.assignedSchedules[i] = new Schedule(schedules[i]);
+	printf("Sala seleccionada %d: \n", roomSelect);
+
+	if (movie != nullptr) {
+		printf("Pelicula: \n");
+		cout << movie->printMovie();
 	}
-}
+	else
+	{
+		printf("No hay pelicula asignada.\n");
+	}
 
-Movie Room::getAssingnedMovie(int roomSelect)
-{
-	return rooms[roomSelect].assignedMovie;
-}
-
-void Room::printRoom(int room)
-{
-	Room& selectedRoom = rooms[room - 1];
-	Movie movie = selectedRoom.assignedMovie;
+	if (schedule != nullptr)
+	{
+		printf("Horario: \n");
+		cout << schedule->printSchedule();
+	}
+	else
+	{
+		printf("No hay horario asignado.\n");
+	}
 	printf("\t\t\tPantalla aqui\n\n");
-
-
 
 	for (int i = 0; i < columns; i++)
 	{
 		printf("  %2d", i + 1);
 	}
-	cout << endl;
+	printf("\n");
 	for (int i = 0; i < rows; i++)
 	{
 		printf("%2d| ", i + 1);
 		for (int j = 0; j < columns; j++)
 		{
-			cout << selectedRoom.seats[i][j] << " | ";
+			printf("%s | ", seats[i][j].c_str());
 		}
-		cout << "\n";
-	}
-}
-
-Schedule Room::getAssignedSchedule(int roomSelect)
-{
-	return rooms[roomSelect].assignedSchedule;
-}
-
-void Room::printRoomInfo(int room)
-{
-	Room& selectedRoom = rooms[room - 1];
-	Movie movie = selectedRoom.assignedMovie;
-
-	printf("Sala %d - Pelicula: %s\n", room, movie.getName().c_str());
-	printf("Pais: %s\n", movie.getCountry().c_str());
-	printf("Review: %s\n", movie.getReview().c_str());
-	printf("Duracion: %d minutos\n", movie.getDuration());
-	printf("Anio: %d\n", movie.getYear());
-
-	printf("Horarios asignados:\n");
-	for (int i = 0; i < selectedRoom.scheduleCount; i++) {
-		Schedule* schedule = selectedRoom.assignedSchedules[i];
-		printf("Fecha: %s\n", schedule->getDay().c_str());
-		printf("Hora inicio: %s\n", schedule->getStartHour().c_str());
-		printf("Hora fin: %s\n", schedule->getEndHour().c_str());
+		printf("\n");
 	}
 
-	printRoom(room);
 }
 
-bool Room::freeSeats(int roomSelect, int row, int column)
+void Room::printOnlyMovie(int roomSelect)
 {
-	if (rooms[roomSelect - 1].seats[row - 1][column - 1] == "D")
+	printf("Pelicula: \n");
+	cout << movie->printMoviePurchased();
+
+	printf("Horario: \n");
+	cout << schedule->printSchedule();
+
+}
+
+void Room::assignSchedule(Schedule* schedule)
+{
+	this->schedule = schedule;
+}
+
+void Room::assignMovie(Movie* movie)
+{
+	this->movie = movie;
+}
+
+bool Room::isValidSeats(int row, int column)
+{
+	if (seats[row - 1][column - 1] == "D")
 	{
 		return true;
 	}
@@ -126,38 +113,47 @@ bool Room::freeSeats(int roomSelect, int row, int column)
 	}
 }
 
-bool Room::isReserveSeats(int roomSelect, int row, int column)
+void Room::reservedSeats(int row, int column)
 {
-	if (rooms[roomSelect - 1].seats[row - 1][column - 1] == "R")
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-void Room::reserveSeats(int roomSelect, int row, int column)
-{
-	bool access = freeSeats(roomSelect, row, column);
-
+	bool access = isValidSeats(row, column);
 	if (access)
 	{
-		rooms[roomSelect - 1].seats[row - 1][column - 1] = "R";
+		seats[row - 1][column - 1] = "R";
 		printf("Asiento(s) reservado(s)\n");
 	}
-	else {
-		printf("Lo sentimos, asiento ocupado\n");
+	else
+	{
+		printf("Lo sentimos, asiento reservado o comprado.\n");
 	}
 }
 
-void Room::buySeats(int roomSelect, int row, int column)
+bool Room::isSeatsPurchased(int row, int column)
 {
-	bool access = isReserveSeats(roomSelect, row, column);
-
-	if (access)
+	if (seats[row - 1][column - 1] == "R")
 	{
-		rooms[roomSelect - 1].seats[row - 1][column - 1] = "C";
+		return true;
 	}
+	else
+	{
+		return false;
+	}
+}
+
+void Room::changeReservedToPurchased(int row, int column)
+{
+	bool change = isSeatsPurchased(row, column);
+	if (change)
+	{
+		seats[row - 1][column - 1] = "C";
+	}
+}
+
+Schedule* Room::getSchedule()
+{
+	return schedule;
+}
+
+Movie* Room::getMovie()
+{
+	return movie;
 }

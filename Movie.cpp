@@ -2,74 +2,68 @@
 
 Movie::Movie()
 {
-	name = " ";
-	country = " ";
-	review = " ";
-	duration = 0;
-	year = 0;
+	nameMovie = " ";
+	countryMovie = " ";
+	reviewMovie = " ";
+	durationMovie = 0;
+	yearMovie = 0;
+	movies = nullptr;
 }
 
-Movie::Movie(string name, string country, string review, int duration, int year)
+Movie::Movie(string nameMovie, string countryMovie, string reviewMovie, int durationMovie, int yearMovie)
 {
-	this->name = name;
-	this->country = country;
-	this->review = review;
-	this->duration = duration;
-	this->year = year;
+	this->nameMovie = nameMovie;
+	this->countryMovie = countryMovie;
+	this->reviewMovie = reviewMovie;
+	this->durationMovie = durationMovie;
+	this->yearMovie = yearMovie;
+	this->movies = movies;
 }
 
-void Movie::setName(string name)
+Movie::~Movie()
 {
-	this->name = name;
+	delete movies;
 }
 
-void Movie::setCountry(string country)
+void Movie::createMovies(int numOfMovies)
 {
-	this->country = country;
+	int movieCount = 0;
+	movies = new Movie * [numOfMovies];
+
+	printf("Nombre de la pelicula: \n");
+	getline(cin, nameMovie);
+
+	printf("Pais de la pelicula: \n");
+	getline(cin, countryMovie);
+
+	printf("Review de la pelicula: \n");
+	getline(cin, reviewMovie);
+
+	printf("Duracion de la pelicula en minutos: \n");
+	scanf_s("%d", &durationMovie);
+
+	printf("Anio de la pelicula: \n");
+	scanf_s("%d", &yearMovie);
+	cin.ignore();
+
+	movies[movieCount] = new Movie(nameMovie, countryMovie, reviewMovie, durationMovie, yearMovie);
+	movieCount++;
 }
 
-void Movie::setReview(string review)
+string Movie::printMovie()
 {
-	this->review = review;
+	string movie;
+
+	movie += "Nombre: " + nameMovie + "\n";
+	movie += "Pais: " + countryMovie + "\n";
+	movie += "Review: " + reviewMovie + "\n";
+	movie += "Duracion: " + to_string(durationMovie) + " minutos\n";
+	movie += "Anio: " + to_string(yearMovie) + "\n";
+
+	return movie;
 }
 
-void Movie::setDuration(int duration)
+string Movie::printMoviePurchased()
 {
-	this->duration = duration;
+	return "Nombre: " + nameMovie + "\n";
 }
-
-void Movie::setYear(int year)
-{
-	this->year = year;
-}
-
-string Movie::getName()
-{
-	return name;
-}
-
-string Movie::getCountry()
-{
-	return country;
-}
-
-string Movie::getReview()
-{
-	return review;
-}
-
-int Movie::getDuration()
-{
-	return duration;
-}
-
-int Movie::getYear()
-{
-	return year;
-}
-
-void Movie::toString()
-{
-
-}
-

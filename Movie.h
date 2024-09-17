@@ -1,32 +1,23 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "Schedule.h"
 using namespace std;
-
 class Movie
 {
 private:
-	string name;
-	string country;
-	string review;
-	int duration;
-	int year;
+	string nameMovie;
+	string countryMovie;
+	string reviewMovie;
+	int durationMovie;
+	int yearMovie;
+	Movie** movies;
 public:
 	Movie();
-	Movie(string name, string country, string review, int duration, int year);
+	Movie(string nameMovie, string countryMovie, string reviewMovie, int durationMovie, int yearMovie);
+	~Movie();
+	void createMovies(int numOfMovies);
 
-	void setName(string name);
-	void setCountry(string country);
-	void setReview(string review);
-	void setDuration(int duration);
-	void setYear(int year);
-
-	string getName();
-	string getCountry();
-	string getReview();
-	int getDuration();
-	int getYear();
-
-	void toString();
+	string printMovie();
+	string printMoviePurchased();
 };
+

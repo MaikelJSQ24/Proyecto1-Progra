@@ -10,34 +10,42 @@ using namespace std;
 class Cinema
 {
 private:
-	int option;
-	bool open;
-	Movie movieInfo;
-	Movie* movies;
-	Room roomInfo;
-	Schedule scheduleInfo;
-	Schedule* schedules;
-	Client clientInfo;
-	int numOfSchedules;
-	int* ticketVector;
-	int numOfTickets;
-	int newNumOfTickets;
+	int numOfMovies;
+	int numOfRooms;
+	int numOfFuntions;
 	int seatsReserved;
+	int numOfTickets;
+	int roomSelected;
+	int numOfClients;
+	int option;
+	int allSeatsReserved;
+	bool open;
+	int* ticketVector;
+	int* reservedSeatsRow;
+	int* reservedSeatsColumn;
+	Movie* movieInfo;
+	Room* roomInfo;
+	Schedule* scheduleInfo;
+	Client* clientVector;
+	Client clientInfo;
 public:
 	Cinema();
-
+	~Cinema();
 	void archiveMenu();
-	void maintenanceMenu();
+	void menuOfMaintenance();
 	void reserveMenu();
 	void buyMenu();
-
 	void about();
-
-	void createMovies(Movie& movie);
-	void createSchedules(Schedule& schedule);
+	void assignScheduleAndMovie();
+	void loadTicketVector(int* firstTicketVector, int* secondTicketVector, int sizeOfVector);
+	void loadTickets(int*& ticketVector, int& size, int newTicket);
+	int generateTicket();
 	void createTicket();
 	int* getTicketVector();
-	int getSeats();
 	bool correctTicket(int typedTicket);
+	void addClient(string nameClient, int& size, int ticket);
+	int findTheTicket(string name);
 	void dataClient();
+	int getRoomSelect();
+
 };

@@ -9,27 +9,22 @@ class Room
 private:
 	string** seats;
 	Room* rooms;
-	int numOfRooms;
-	Movie assignedMovie;
-	Schedule assignedSchedule;
-	Schedule** assignedSchedules;
-	int scheduleCount;
+	Schedule* schedule;
+	Movie* movie;
+
 public:
 	Room();
-	void setScheduleCount(int scheduleCount);
-	int getScheduleCount();
-
-
+	~Room();
 	void createRooms(int numOfRooms);
-	void printRoom(int room);
-	void assingMovie(int roomSelect, Movie& movie);
-	void assingSchedule(int roomSelect, Schedule* schedules, int scheduleCount);
-	Movie getAssingnedMovie(int roomSelect);
-	Schedule getAssignedSchedule(int roomSelect);
-
-	bool freeSeats(int roomSelect, int row, int column);
-	bool isReserveSeats(int roomSelect, int row, int column);
-	void reserveSeats(int roomSelect, int row, int column);
-	void buySeats(int roomSelect, int row, int column);
-	void printRoomInfo(int room);
+	void printRoom(int roomSelect);
+	void printOnlyMovie(int roomSelect);
+	void assignSchedule(Schedule* schedule);
+	void assignMovie(Movie* movie);
+	bool isValidSeats(int row, int column);
+	void reservedSeats(int row, int column);
+	bool isSeatsPurchased(int row, int column);
+	void changeReservedToPurchased(int row, int column);
+	Schedule* getSchedule();
+	Movie* getMovie();
 };
+
